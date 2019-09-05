@@ -41,6 +41,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import org.odk.collect.android.R;
+import org.odk.collect.android.R2;
 import org.odk.collect.android.adapters.InstanceUploaderAdapter;
 import org.odk.collect.android.dao.InstancesDao;
 import org.odk.collect.android.injection.DaggerUtils;
@@ -91,11 +92,11 @@ public class InstanceUploaderListActivity extends InstanceListActivity implement
 
     private static final int INSTANCE_UPLOADER = 0;
 
-    @BindView(R.id.upload_button)
+    @BindView(R2.id.upload_button)
     Button uploadButton;
-    @BindView(R.id.sms_upload_button)
+    @BindView(R2.id.sms_upload_button)
     Button smsUploadButton;
-    @BindView(R.id.toggle_button)
+    @BindView(R2.id.toggle_button)
     Button toggleSelsButton;
 
     private InstancesDao instancesDao;
@@ -171,7 +172,7 @@ public class InstanceUploaderListActivity extends InstanceListActivity implement
      *
      * @param button that triggers an upload
      */
-    @OnClick({R.id.upload_button, R.id.sms_upload_button})
+    @OnClick({R2.id.upload_button, R2.id.sms_upload_button})
     public void onUploadButtonsClicked(Button button) {
         Transport transport = Transport.fromPreference(GeneralSharedPreferences.getInstance().get(KEY_SUBMISSION_TRANSPORT_TYPE));
 
@@ -397,14 +398,24 @@ public class InstanceUploaderListActivity extends InstanceListActivity implement
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_preferences:
-                createPreferencesMenu();
-                return true;
-            case R.id.menu_change_view:
-                showSentAndUnsentChoices();
-                return true;
+        int id = item.getItemId();
+
+        if (id == R.id.menu_preferences) {
+            createPreferencesMenu();
+            return true;
+        } else if (id == R.id.menu_change_view) {
+            showSentAndUnsentChoices();
+            return true;
         }
+
+//        switch (item.getItemId()) {
+//            case R.id.menu_preferences:
+//                createPreferencesMenu();
+//                return true;
+//            case R.id.menu_change_view:
+//                showSentAndUnsentChoices();
+//                return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 

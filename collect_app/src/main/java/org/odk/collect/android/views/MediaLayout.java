@@ -38,6 +38,7 @@ import org.javarosa.core.reference.InvalidReferenceException;
 import org.javarosa.core.reference.ReferenceManager;
 import org.odk.collect.android.BuildConfig;
 import org.odk.collect.android.R;
+import org.odk.collect.android.R2;
 import org.odk.collect.android.listeners.AudioPlayListener;
 import org.odk.collect.android.utilities.FileUtils;
 import org.odk.collect.android.utilities.ThemeUtils;
@@ -57,22 +58,22 @@ import timber.log.Timber;
  */
 public class MediaLayout extends RelativeLayout implements View.OnClickListener {
 
-    @BindView(R.id.audioButton)
+    @BindView(R2.id.audioButton)
     AudioButton audioButton;
 
-    @BindView(R.id.videoButton)
+    @BindView(R2.id.videoButton)
     AppCompatImageButton videoButton;
 
-    @BindView(R.id.imageView)
+    @BindView(R2.id.imageView)
     ImageView imageView;
 
-    @BindView(R.id.missingImage)
+    @BindView(R2.id.missingImage)
     TextView missingImage;
 
-    @BindView(R.id.divider)
+    @BindView(R2.id.divider)
     ImageView divider;
 
-    @BindView(R.id.select_container)
+    @BindView(R2.id.select_container)
     FrameLayout flContainer;
 
     private TextView viewText;
@@ -248,17 +249,27 @@ public class MediaLayout extends RelativeLayout implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.audioButton:
-                playAudio();
-                break;
-            case R.id.videoButton:
-                playVideo();
-                break;
-            case R.id.imageView:
-                onImageClick();
-                break;
+        int id = v.getId();
+
+        if (id == R.id.audioButton) {
+            playAudio();
+        } else if (id == R.id.videoButton) {
+            playVideo();
+        } else if (id == R.id.imageView) {
+            onImageClick();
         }
+
+//        switch (v.getId()) {
+//            case R.id.audioButton:
+//                playAudio();
+//                break;
+//            case R.id.videoButton:
+//                playVideo();
+//                break;
+//            case R.id.imageView:
+//                onImageClick();
+//                break;
+//        }
     }
 
     @Override

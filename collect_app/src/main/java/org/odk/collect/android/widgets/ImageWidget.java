@@ -119,23 +119,39 @@ public class ImageWidget extends BaseImageWidget {
 
     @Override
     public void onButtonClick(int buttonId) {
-        switch (buttonId) {
-            case R.id.capture_image:
-                getPermissionUtils().requestCameraPermission((Activity) getContext(), new PermissionListener() {
-                    @Override
-                    public void granted() {
-                        captureImage();
-                    }
 
-                    @Override
-                    public void denied() {
-                    }
-                });
-                break;
-            case R.id.choose_image:
-                imageCaptureHandler.chooseImage(R.string.choose_image);
-                break;
+        if (buttonId == R.id.capture_image) {
+            getPermissionUtils().requestCameraPermission((Activity) getContext(), new PermissionListener() {
+                @Override
+                public void granted() {
+                    captureImage();
+                }
+
+                @Override
+                public void denied() {
+                }
+            });
+        } else if (buttonId == R.id.choose_image) {
+            imageCaptureHandler.chooseImage(R.string.choose_image);
         }
+
+//        switch (buttonId) {
+//            case R.id.capture_image:
+//                getPermissionUtils().requestCameraPermission((Activity) getContext(), new PermissionListener() {
+//                    @Override
+//                    public void granted() {
+//                        captureImage();
+//                    }
+//
+//                    @Override
+//                    public void denied() {
+//                    }
+//                });
+//                break;
+//            case R.id.choose_image:
+//                imageCaptureHandler.chooseImage(R.string.choose_image);
+//                break;
+//        }
     }
 
     private void hideButtonsIfNeeded(String appearance) {

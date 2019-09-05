@@ -404,23 +404,43 @@ public class MainMenuActivity extends CollectAbstractActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_about:
-                startActivity(new Intent(this, AboutActivity.class));
-                return true;
-            case R.id.menu_general_preferences:
-                startActivity(new Intent(this, PreferencesActivity.class));
-                return true;
-            case R.id.menu_admin_preferences:
-                String pw = adminPreferences.getString(
-                        AdminKeys.KEY_ADMIN_PW, "");
-                if ("".equalsIgnoreCase(pw)) {
-                    startActivity(new Intent(this, AdminPreferencesActivity.class));
-                } else {
-                    showDialog(PASSWORD_DIALOG);
-                }
-                return true;
+
+        int id = item.getItemId();
+
+        if (id == R.id.menu_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+            return true;
+        } else if (id == R.id.menu_general_preferences) {
+            startActivity(new Intent(this, PreferencesActivity.class));
+            return true;
+        } else if (id == R.id.menu_admin_preferences) {
+            String pw = adminPreferences.getString(
+                    AdminKeys.KEY_ADMIN_PW, "");
+            if ("".equalsIgnoreCase(pw)) {
+                startActivity(new Intent(this, AdminPreferencesActivity.class));
+            } else {
+                showDialog(PASSWORD_DIALOG);
+            }
+            return true;
         }
+
+//        switch (item.getItemId()) {
+//            case R.id.menu_about:
+//                startActivity(new Intent(this, AboutActivity.class));
+//                return true;
+//            case R.id.menu_general_preferences:
+//                startActivity(new Intent(this, PreferencesActivity.class));
+//                return true;
+//            case R.id.menu_admin_preferences:
+//                String pw = adminPreferences.getString(
+//                        AdminKeys.KEY_ADMIN_PW, "");
+//                if ("".equalsIgnoreCase(pw)) {
+//                    startActivity(new Intent(this, AdminPreferencesActivity.class));
+//                } else {
+//                    showDialog(PASSWORD_DIALOG);
+//                }
+//                return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 

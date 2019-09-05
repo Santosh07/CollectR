@@ -822,13 +822,21 @@ public class Camera2Fragment extends Fragment
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.texture: {
-                textureView.setClickable(false);
-                takePicture();
-                break;
-            }
+        int id = view.getId();
+
+        if (id == R.id.texture) {
+            textureView.setClickable(false);
+            takePicture();
         }
+
+
+//        switch (view.getId()) {
+//            case R.id.texture: {
+//                textureView.setClickable(false);
+//                takePicture();
+//                break;
+//            }
+//        }
     }
 
     private void setAutoFlash(CaptureRequest.Builder requestBuilder) {

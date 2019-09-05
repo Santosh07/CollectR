@@ -253,30 +253,53 @@ public class DataManagerList extends InstanceListFragment
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.delete_button:
-                int checkedItemCount = getCheckedCount();
-                if (checkedItemCount > 0) {
-                    createDeleteInstancesDialog();
-                } else {
-                    ToastUtils.showShortToast(R.string.noselect_error);
-                }
-                break;
+        int id = v.getId();
 
-            case R.id.toggle_button:
-                ListView lv = getListView();
-                boolean allChecked = toggleChecked(lv);
-                if (allChecked) {
-                    for (int i = 0; i < lv.getCount(); i++) {
-                        selectedInstances.add(lv.getItemIdAtPosition(i));
-                    }
-                } else {
-                    selectedInstances.clear();
+        if (id == R.id.delete_button) {
+            int checkedItemCount = getCheckedCount();
+            if (checkedItemCount > 0) {
+                createDeleteInstancesDialog();
+            } else {
+                ToastUtils.showShortToast(R.string.noselect_error);
+            }
+        } else if (id == R.id.toggle_button) {
+            ListView lv = getListView();
+            boolean allChecked = toggleChecked(lv);
+            if (allChecked) {
+                for (int i = 0; i < lv.getCount(); i++) {
+                    selectedInstances.add(lv.getItemIdAtPosition(i));
                 }
-                toggleButtonLabel(toggleButton, getListView());
-                deleteButton.setEnabled(allChecked);
-                break;
+            } else {
+                selectedInstances.clear();
+            }
+            toggleButtonLabel(toggleButton, getListView());
+            deleteButton.setEnabled(allChecked);
         }
+
+//        switch (v.getId()) {
+//            case R.id.delete_button:
+//                int checkedItemCount = getCheckedCount();
+//                if (checkedItemCount > 0) {
+//                    createDeleteInstancesDialog();
+//                } else {
+//                    ToastUtils.showShortToast(R.string.noselect_error);
+//                }
+//                break;
+//
+//            case R.id.toggle_button:
+//                ListView lv = getListView();
+//                boolean allChecked = toggleChecked(lv);
+//                if (allChecked) {
+//                    for (int i = 0; i < lv.getCount(); i++) {
+//                        selectedInstances.add(lv.getItemIdAtPosition(i));
+//                    }
+//                } else {
+//                    selectedInstances.clear();
+//                }
+//                toggleButtonLabel(toggleButton, getListView());
+//                deleteButton.setEnabled(allChecked);
+//                break;
+//        }
     }
 
 }

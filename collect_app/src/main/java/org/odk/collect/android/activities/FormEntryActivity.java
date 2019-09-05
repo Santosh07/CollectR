@@ -991,38 +991,72 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         FormController formController = getFormController();
-        switch (item.getItemId()) {
-            case R.id.menu_languages:
-                createLanguageDialog();
-                return true;
-            case R.id.menu_save:
-                // don't exit
-                saveDataToDisk(DO_NOT_EXIT, InstancesDaoHelper.isInstanceComplete(false), null);
-                return true;
-            case R.id.menu_goto:
-                state = null;
-                if (formController != null && formController.currentPromptIsQuestion()) {
-                    saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-                }
 
-                if (formController != null) {
-                    formController.getAuditEventLogger().exitView();
-                    formController.getAuditEventLogger().logEvent(AuditEvent.AuditEventType.HIERARCHY, true);
-                }
+        int id = item.getItemId();
 
-                Intent i = new Intent(this, FormHierarchyActivity.class);
-                startActivityForResult(i, RequestCodes.HIERARCHY_ACTIVITY);
-                return true;
-            case R.id.menu_preferences:
-                Intent pref = new Intent(this, PreferencesActivity.class);
-                startActivity(pref);
-                return true;
-            case R.id.track_location:
-                GeneralSharedPreferences.getInstance().save(KEY_BACKGROUND_LOCATION, !GeneralSharedPreferences.getInstance().getBoolean(KEY_BACKGROUND_LOCATION, true));
+        if (id == R.id.menu_languages) {
+            createLanguageDialog();
+            return true;
+        } else if (id == R.id.menu_save) {
+            saveDataToDisk(DO_NOT_EXIT, InstancesDaoHelper.isInstanceComplete(false), null);
+            return true;
+        } else if (id == R.id.menu_save) {
+            state = null;
+            if (formController != null && formController.currentPromptIsQuestion()) {
+                saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+            }
 
-                viewModel.backgroundLocationPreferenceToggled();
-                return true;
+            if (formController != null) {
+                formController.getAuditEventLogger().exitView();
+                formController.getAuditEventLogger().logEvent(AuditEvent.AuditEventType.HIERARCHY, true);
+            }
+
+            Intent i = new Intent(this, FormHierarchyActivity.class);
+            startActivityForResult(i, RequestCodes.HIERARCHY_ACTIVITY);
+            return true;
+        } else if (id == R.id.menu_preferences) {
+            Intent pref = new Intent(this, PreferencesActivity.class);
+            startActivity(pref);
+            return true;
+        } else if (id == R.id.track_location) {
+            GeneralSharedPreferences.getInstance().save(KEY_BACKGROUND_LOCATION, !GeneralSharedPreferences.getInstance().getBoolean(KEY_BACKGROUND_LOCATION, true));
+
+            viewModel.backgroundLocationPreferenceToggled();
+            return true;
         }
+
+//        switch (item.getItemId()) {
+//            case R.id.menu_languages:
+//                createLanguageDialog();
+//                return true;
+//            case R.id.menu_save:
+//                // don't exit
+//                saveDataToDisk(DO_NOT_EXIT, InstancesDaoHelper.isInstanceComplete(false), null);
+//                return true;
+//            case R.id.menu_goto:
+//                state = null;
+//                if (formController != null && formController.currentPromptIsQuestion()) {
+//                    saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+//                }
+//
+//                if (formController != null) {
+//                    formController.getAuditEventLogger().exitView();
+//                    formController.getAuditEventLogger().logEvent(AuditEvent.AuditEventType.HIERARCHY, true);
+//                }
+//
+//                Intent i = new Intent(this, FormHierarchyActivity.class);
+//                startActivityForResult(i, RequestCodes.HIERARCHY_ACTIVITY);
+//                return true;
+//            case R.id.menu_preferences:
+//                Intent pref = new Intent(this, PreferencesActivity.class);
+//                startActivity(pref);
+//                return true;
+//            case R.id.track_location:
+//                GeneralSharedPreferences.getInstance().save(KEY_BACKGROUND_LOCATION, !GeneralSharedPreferences.getInstance().getBoolean(KEY_BACKGROUND_LOCATION, true));
+//
+//                viewModel.backgroundLocationPreferenceToggled();
+//                return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 

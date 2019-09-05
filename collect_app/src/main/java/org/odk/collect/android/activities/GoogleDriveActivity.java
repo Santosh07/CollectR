@@ -553,35 +553,64 @@ public class GoogleDriveActivity extends FormListActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.root_button:
-                getResultsFromApi();
-                break;
+        int id = v.getId();
 
-            case R.id.back_button:
-                backButton.setEnabled(false);
-                rootButton.setEnabled(false);
-                downloadButton.setEnabled(false);
-                toDownload.clear();
-                driveList.clear();
-                if (isDeviceOnline()) {
-                    if (folderIdStack.empty()) {
-                        parentId = ROOT_KEY;
-                    } else {
-                        parentId = folderIdStack.pop();
-                    }
-                    listFiles(parentId);
-                    currentPath.pop();
-                    // }
+        if (id == R.id.root_button) {
+            getResultsFromApi();
+        } else if (id == R.id.back_button) {
+            backButton.setEnabled(false);
+            rootButton.setEnabled(false);
+            downloadButton.setEnabled(false);
+            toDownload.clear();
+            driveList.clear();
+            if (isDeviceOnline()) {
+                if (folderIdStack.empty()) {
+                    parentId = ROOT_KEY;
                 } else {
-                    createAlertDialog(getString(R.string.no_connection));
+                    parentId = folderIdStack.pop();
                 }
-                break;
-
-            case R.id.download_button:
-                getFiles();
-                break;
+                listFiles(parentId);
+                currentPath.pop();
+                // }
+            } else {
+                createAlertDialog(getString(R.string.no_connection));
+            }
+        } else if (id == R.id.download_button) {
+            getFiles();
         }
+
+
+
+
+//        switch (v.getId()) {
+//            case R.id.root_button:
+//                getResultsFromApi();
+//                break;
+//
+//            case R.id.back_button:
+//                backButton.setEnabled(false);
+//                rootButton.setEnabled(false);
+//                downloadButton.setEnabled(false);
+//                toDownload.clear();
+//                driveList.clear();
+//                if (isDeviceOnline()) {
+//                    if (folderIdStack.empty()) {
+//                        parentId = ROOT_KEY;
+//                    } else {
+//                        parentId = folderIdStack.pop();
+//                    }
+//                    listFiles(parentId);
+//                    currentPath.pop();
+//                    // }
+//                } else {
+//                    createAlertDialog(getString(R.string.no_connection));
+//                }
+//                break;
+//
+//            case R.id.download_button:
+//                getFiles();
+//                break;
+//        }
     }
 
     @Override

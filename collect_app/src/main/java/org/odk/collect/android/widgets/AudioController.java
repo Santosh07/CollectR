@@ -29,6 +29,7 @@ import android.widget.TextView;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.odk.collect.android.R;
+import org.odk.collect.android.R2;
 import org.odk.collect.android.activities.FormEntryActivity;
 
 import java.io.File;
@@ -46,13 +47,13 @@ public class AudioController implements SeekBar.OnSeekBarChangeListener {
     private static final int SEEK_FORWARD_TIME = 5000; // 5 seconds
     private static final int SEEK_BACKWARD_TIME = 5000; // 5 seconds
 
-    @BindView(R.id.currentDuration)
+    @BindView(R2.id.currentDuration)
     TextView currentDurationLabel;
-    @BindView(R.id.totalDuration)
+    @BindView(R2.id.totalDuration)
     TextView totalDurationLabel;
-    @BindView(R.id.playBtn)
+    @BindView(R2.id.playBtn)
     ImageButton playButton;
-    @BindView(R.id.seekBar)
+    @BindView(R2.id.seekBar)
     SeekBar seekBar;
 
     private View view;
@@ -97,12 +98,12 @@ public class AudioController implements SeekBar.OnSeekBarChangeListener {
         initMediaPlayer();
     }
 
-    @OnClick(R.id.fastForwardBtn)
+    @OnClick(R2.id.fastForwardBtn)
     void fastForwardMedia() {
         seekTo(mediaPlayer.getCurrentPosition() + SEEK_FORWARD_TIME);
     }
 
-    @OnClick(R.id.fastRewindBtn)
+    @OnClick(R2.id.fastRewindBtn)
     void rewindMedia() {
         seekTo(mediaPlayer.getCurrentPosition() - SEEK_BACKWARD_TIME);
     }
@@ -115,7 +116,7 @@ public class AudioController implements SeekBar.OnSeekBarChangeListener {
         updateTimer();
     }
 
-    @OnClick(R.id.playBtn)
+    @OnClick(R2.id.playBtn)
     void playClicked() {
         if (mediaPlayer.isPlaying()) {
             pause();

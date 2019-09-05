@@ -33,7 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 
-import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.Crashlytics;
 import com.evernote.android.job.JobManager;
 import com.evernote.android.job.JobManagerCreateException;
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -41,7 +41,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.security.ProviderInstaller;
-import com.google.firebase.analytics.FirebaseAnalytics;
+//import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -52,6 +52,7 @@ import org.odk.collect.android.R;
 import org.odk.collect.android.dao.FormsDao;
 import org.odk.collect.android.external.ExternalDataManager;
 import org.odk.collect.android.injection.config.AppDependencyComponent;
+//import org.odk.collect.android.injection.config.DaggerAppDependencyComponent;
 import org.odk.collect.android.injection.config.DaggerAppDependencyComponent;
 import org.odk.collect.android.jobs.CollectJobCreator;
 import org.odk.collect.android.logic.FormController;
@@ -114,7 +115,7 @@ public class Collect extends Application {
     private FormController formController;
     private ExternalDataManager externalDataManager;
     private Tracker tracker;
-    private FirebaseAnalytics firebaseAnalytics;
+    //private FirebaseAnalytics firebaseAnalytics;
     private AppDependencyComponent applicationComponent;
 
     public static Collect getInstance() {
@@ -243,7 +244,7 @@ public class Collect extends Application {
     public void onCreate() {
         super.onCreate();
         singleton = this;
-        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        //firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         installTls12();
         setupDagger();
@@ -362,11 +363,11 @@ public class Collect extends Application {
         Bundle bundle = new Bundle();
         bundle.putString("action", action);
         bundle.putString("label", label);
-        firebaseAnalytics.logEvent(event, bundle);
+        //firebaseAnalytics.logEvent(event, bundle);
     }
 
     public void setAnalyticsCollectionEnabled(boolean isAnalyticsEnabled) {
-        firebaseAnalytics.setAnalyticsCollectionEnabled(isAnalyticsEnabled);
+        //firebaseAnalytics.setAnalyticsCollectionEnabled(isAnalyticsEnabled);
     }
 
     private static class CrashReportingTree extends Timber.Tree {
@@ -376,10 +377,10 @@ public class Collect extends Application {
                 return;
             }
 
-            Crashlytics.log(priority, tag, message);
+           // Crashlytics.log(priority, tag, message);
 
             if (t != null && priority == Log.ERROR) {
-                Crashlytics.logException(t);
+                //Crashlytics.logException(t);
             }
         }
     }

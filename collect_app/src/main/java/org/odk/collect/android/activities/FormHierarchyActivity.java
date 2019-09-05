@@ -260,35 +260,63 @@ public class FormHierarchyActivity extends CollectAbstractActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_delete_child:
-                DialogUtils.showDeleteRepeatConfirmDialog(this, () -> {
-                    if (didDeleteLastRepeatItem()) {
-                        // goUpLevel would put us in a weird state after deleting the last item;
-                        // just go back one event instead.
-                        //
-                        // TODO: This works well in most cases, but if there are 2 repeats in a row,
-                        //   and you delete an item from the second repeat, it will send you into the
-                        //   first repeat instead of going back a level as expected.
-                        goToPreviousEvent();
-                    } else {
-                        goUpLevel();
-                    }
-                }, null);
-                return true;
+        int id = item.getItemId();
 
-            case R.id.menu_add_child:
-                FormIndex repeatPromptIndex = getRepeatPromptIndex(repeatGroupPickerIndex);
-                exitToIndex(repeatPromptIndex);
-                return true;
-
-            case R.id.menu_go_up:
-                goUpLevel();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        if (id == R.id.menu_delete_child) {
+            DialogUtils.showDeleteRepeatConfirmDialog(this, () -> {
+                if (didDeleteLastRepeatItem()) {
+                    // goUpLevel would put us in a weird state after deleting the last item;
+                    // just go back one event instead.
+                    //
+                    // TODO: This works well in most cases, but if there are 2 repeats in a row,
+                    //   and you delete an item from the second repeat, it will send you into the
+                    //   first repeat instead of going back a level as expected.
+                    goToPreviousEvent();
+                } else {
+                    goUpLevel();
+                }
+            }, null);
+            return true;
+        } else if (id == R.id.menu_add_child) {
+            FormIndex repeatPromptIndex = getRepeatPromptIndex(repeatGroupPickerIndex);
+            exitToIndex(repeatPromptIndex);
+            return true;
+        } else if (id == R.id.menu_go_up) {
+            goUpLevel();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
+
+//        switch (item.getItemId()) {
+//            case R.id.menu_delete_child:
+//                DialogUtils.showDeleteRepeatConfirmDialog(this, () -> {
+//                    if (didDeleteLastRepeatItem()) {
+//                        // goUpLevel would put us in a weird state after deleting the last item;
+//                        // just go back one event instead.
+//                        //
+//                        // TODO: This works well in most cases, but if there are 2 repeats in a row,
+//                        //   and you delete an item from the second repeat, it will send you into the
+//                        //   first repeat instead of going back a level as expected.
+//                        goToPreviousEvent();
+//                    } else {
+//                        goUpLevel();
+//                    }
+//                }, null);
+//                return true;
+//
+//            case R.id.menu_add_child:
+//                FormIndex repeatPromptIndex = getRepeatPromptIndex(repeatGroupPickerIndex);
+//                exitToIndex(repeatPromptIndex);
+//                return true;
+//
+//            case R.id.menu_go_up:
+//                goUpLevel();
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
     }
 
     /**

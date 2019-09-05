@@ -42,6 +42,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.odk.collect.android.BuildConfig;
 import org.odk.collect.android.R;
+import org.odk.collect.android.R2;
 import org.odk.collect.android.activities.MainMenuActivity;
 import org.odk.collect.android.activities.ScannerWithFlashlightActivity;
 import org.odk.collect.android.application.Collect;
@@ -87,11 +88,11 @@ public class ShowQRCodeFragment extends Fragment {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final boolean[] checkedItems = new boolean[]{true, true};
 
-    @BindView(R.id.ivQRcode)
+    @BindView(R2.id.ivQRcode)
     ImageView ivQRCode;
-    @BindView(R.id.circularProgressBar)
+    @BindView(R2.id.circularProgressBar)
     ProgressBar progressBar;
-    @BindView(R.id.tvPasswordWarning)
+    @BindView(R2.id.tvPasswordWarning)
     TextView tvPasswordWarning;
 
     private Intent shareIntent;
@@ -159,7 +160,7 @@ public class ShowQRCodeFragment extends Fragment {
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
     }
 
-    @OnClick(R.id.btnScan)
+    @OnClick(R2.id.btnScan)
     void scanButtonClicked() {
         new PermissionUtils().requestCameraPermission(getActivity(), new PermissionListener() {
             @Override
@@ -179,7 +180,7 @@ public class ShowQRCodeFragment extends Fragment {
         });
     }
 
-    @OnClick(R.id.btnSelect)
+    @OnClick(R2.id.btnSelect)
     void chooseButtonClicked() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
@@ -191,7 +192,7 @@ public class ShowQRCodeFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.tvPasswordWarning)
+    @OnClick(R2.id.tvPasswordWarning)
     void passwordWarningClicked() {
         if (dialog == null) {
             final String[] items = new String[]{
@@ -297,32 +298,61 @@ public class ShowQRCodeFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_share:
-                if (shareIntent != null) {
-                    startActivity(Intent.createChooser(shareIntent, getString(R.string.share_qrcode)));
-                }
-                return true;
-            case R.id.menu_save_preferences:
-                File writeDir = new File(Collect.SETTINGS);
-                if (!writeDir.exists()) {
-                    if (!writeDir.mkdirs()) {
-                        ToastUtils.showShortToast("Error creating directory "
-                                + writeDir.getAbsolutePath());
-                        return false;
-                    }
-                }
+        int id = item.getItemId();
 
-                File dst = new File(writeDir.getAbsolutePath() + "/collect.settings");
-                boolean success = AdminPreferencesActivity.saveSharedPreferencesToFile(dst, getActivity());
-                if (success) {
-                    ToastUtils.showLongToast("Settings successfully written to "
-                            + dst.getAbsolutePath());
-                } else {
-                    ToastUtils.showLongToast("Error writing settings to " + dst.getAbsolutePath());
+        if (id == R.id.menu_item_share) {
+            if (shareIntent != null) {
+                startActivity(Intent.createChooser(shareIntent, getString(R.string.share_qrcode)));
+            }
+            return true;
+        } else if (id == R.id.menu_save_preferences) {
+            File writeDir = new File(Collect.SETTINGS);
+            if (!writeDir.exists()) {
+                if (!writeDir.mkdirs()) {
+                    ToastUtils.showShortToast("Error creating directory "
+                            + writeDir.getAbsolutePath());
+                    return false;
                 }
-                return true;
+            }
+
+            File dst = new File(writeDir.getAbsolutePath() + "/collect.settings");
+            boolean success = AdminPreferencesActivity.saveSharedPreferencesToFile(dst, getActivity());
+            if (success) {
+                ToastUtils.showLongToast("Settings successfully written to "
+                        + dst.getAbsolutePath());
+            } else {
+                ToastUtils.showLongToast("Error writing settings to " + dst.getAbsolutePath());
+            }
+            return true;
         }
+
+
+//        switch (item.getItemId()) {
+//            case R.id.menu_item_share:
+//                if (shareIntent != null) {
+//                    startActivity(Intent.createChooser(shareIntent, getString(R.string.share_qrcode)));
+//                }
+//                return true;
+//            case R.id.menu_save_preferences:
+//                File writeDir = new File(Collect.SETTINGS);
+//                if (!writeDir.exists()) {
+//                    if (!writeDir.mkdirs()) {
+//                        ToastUtils.showShortToast("Error creating directory "
+//                                + writeDir.getAbsolutePath());
+//                        return false;
+//                    }
+//                }
+//
+//                File dst = new File(writeDir.getAbsolutePath() + "/collect.settings");
+//                boolean success = AdminPreferencesActivity.saveSharedPreferencesToFile(dst, getActivity());
+//                if (success) {
+//                    ToastUtils.showLongToast("Settings successfully written to "
+//                            + dst.getAbsolutePath());
+//                } else {
+//                    ToastUtils.showLongToast("Error writing settings to " + dst.getAbsolutePath());
+//                }
+//                return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 

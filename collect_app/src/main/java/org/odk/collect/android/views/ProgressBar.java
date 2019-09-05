@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import org.odk.collect.android.R;
+import org.odk.collect.android.R2;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,11 +18,11 @@ import butterknife.ButterKnife;
 public class ProgressBar extends FrameLayout {
 
     private static final int DURATION_MILLIS = 1000;
-    @BindView(R.id.progress_view)
+    @BindView(R2.id.progress_view)
     View progressBar;
-    @BindView(R.id.divider)
+    @BindView(R2.id.divider)
     View divider;
-    @BindView(R.id.main_layout)
+    @BindView(R2.id.main_layout)
     FrameLayout mainLayout;
 
     public ProgressBar(Context context) {
