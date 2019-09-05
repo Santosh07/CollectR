@@ -1000,7 +1000,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
         } else if (id == R.id.menu_save) {
             saveDataToDisk(DO_NOT_EXIT, InstancesDaoHelper.isInstanceComplete(false), null);
             return true;
-        } else if (id == R.id.menu_save) {
+        } else if (id == R.id.menu_goto) {
             state = null;
             if (formController != null && formController.currentPromptIsQuestion()) {
                 saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
