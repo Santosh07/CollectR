@@ -50,7 +50,7 @@ public class StringWidget extends QuestionWidget {
     boolean readOnly;
     private final EditText answerText;
 
-    protected StringWidget(Context context, FormEntryPrompt prompt, boolean readOnlyOverride) {
+    public StringWidget(Context context, FormEntryPrompt prompt, boolean readOnlyOverride) {
         super(context, prompt);
 
         answerText = new EditText(context);
@@ -103,6 +103,8 @@ public class StringWidget extends QuestionWidget {
             answerText.setFocusable(false);
         }
 
+        formatWidget();
+
         addAnswerView(answerText);
         answerText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -121,6 +123,8 @@ public class StringWidget extends QuestionWidget {
             }
         });
     }
+
+    public void formatWidget() { }
 
     @Override
     public void clearAnswer() {

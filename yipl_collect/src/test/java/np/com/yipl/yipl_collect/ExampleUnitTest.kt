@@ -1,4 +1,4 @@
-package com.santosh.collectr
+package np.com.yipl.yipl_collect
 
 import org.junit.Test
 

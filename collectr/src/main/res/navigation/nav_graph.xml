@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="np.com.yipl.collectr.ui.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_login_graph"
+            app:destination="@id/login_graph" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="np.com.yipl.collectr.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <navigation
+        android:id="@+id/login_graph"
+        app:startDestination="@id/splashFragment" >
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="np.com.yipl.collectr.ui.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login" >
+            <action
+                android:id="@+id/action_loginFragment_to_formListFragment"
+                app:destination="@id/formListFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/splashFragment"
+            android:name="np.com.yipl.collectr.ui.SplashFragment"
+            android:label="fragment_splash"
+            tools:layout="@layout/fragment_splash" >
+            <action
+                android:id="@+id/action_splashFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/formListFragment"
+            android:name="np.com.yipl.collectr.ui.FormListFragment"
+            android:label="fragment_form_list"
+            tools:layout="@layout/fragment_form_list" >
+            <action
+                android:id="@+id/action_formListFragment_to_downloadCompleteDialogFragment2"
+                app:destination="@id/downloadCompleteDialogFragment2" />
+        </fragment>
+        <dialog
+            android:id="@+id/downloadCompleteDialogFragment2"
+            android:name="np.com.yipl.collectr.ui.DownloadCompleteDialogFragment"
+            android:label="fragment_dialog_download_complete"
+            tools:layout="@layout/fragment_dialog_download_complete" >
+            <action
+                android:id="@+id/action_downloadCompleteDialogFragment2_to_downloadedFormsFragment"
+                app:destination="@id/downloadedFormsFragment" />
+        </dialog>
+        <fragment
+            android:id="@+id/downloadedFormsFragment"
+            android:name="np.com.yipl.collectr.ui.DownloadedFormsFragment"
+            android:label="fragment_downloaded_forms"
+            tools:layout="@layout/fragment_downloaded_forms" />
+    </navigation>
+
+</navigation>

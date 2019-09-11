@@ -1,1 +1,1 @@
-include ':collect_app', ':collectr'
+include ':collect_app', ':yipl_collect', ':collectr'

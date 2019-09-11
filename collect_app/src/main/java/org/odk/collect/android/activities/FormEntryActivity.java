@@ -1216,7 +1216,8 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
                     FormEntryCaption[] groups = formController
                             .getGroupsForCurrentIndex();
 
-                    odkView = new ODKView(this, prompts, groups, advancingPage);
+                    //odkView = new ODKView(this, prompts, groups, advancingPage);
+                    odkView = createODKView(this, prompts, groups, advancingPage);
                     odkView.setWidgetValueChangedListener(this);
                     Timber.i("Created view for group %s %s",
                             groups.length > 0 ? groups[groups.length - 1].getLongText() : "[top]",
@@ -1256,6 +1257,10 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
                 }
                 return createView(event, advancingPage);
         }
+    }
+
+    public ODKView createODKView(Context context, FormEntryPrompt[] prompts, FormEntryCaption[] groups, boolean advancingPage) {
+        return new ODKView(this, prompts, groups, advancingPage);
     }
 
     private void releaseOdkView() {
